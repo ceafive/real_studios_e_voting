@@ -1,37 +1,31 @@
-const utilityFn = (group, data) => {
+export const addVoter = (data) => {
   const userData = { ...data };
 
-  if (group === "voters") {
-    const voterOTP = Math.floor(100000 + Math.random() * 900000);
-    userData.otp = voterOTP;
-  }
+  const voterOTP = Math.floor(100000 + Math.random() * 900000);
+  userData.otp = voterOTP;
 
   const storageData = localStorage.getItem("real_studios");
   if (!storageData) {
     const allUsers = [userData];
-    localStorage.setItem("real_studios", JSON.stringify({ [group]: allUsers }));
+    localStorage.setItem("real_studios", JSON.stringify({ voters: allUsers }));
   } else {
     const parsedData = JSON.parse(storageData);
-    const data = parsedData[group];
+    const data = parsedData["voters"];
     if (data) {
       const newUsersArray = [...data];
       newUsersArray.push(userData);
       localStorage.setItem(
         "real_studios",
-        JSON.stringify({ ...parsedData, [group]: newUsersArray })
+        JSON.stringify({ ...parsedData, voters: newUsersArray })
       );
     } else {
       const allUsers = [userData];
       localStorage.setItem(
         "real_studios",
-        JSON.stringify({ ...parsedData, [group]: allUsers })
+        JSON.stringify({ ...parsedData, voters: allUsers })
       );
     }
   }
-};
-
-export const addVoter = (data) => {
-  return utilityFn("voters", data);
 };
 
 export const addCandidate = (data) => {
@@ -137,7 +131,7 @@ export const sendOTP = async (to, text) => {
     });
 
     const data = await response.json();
-    console.log(data);
+    // console.log(data);
     return (res.success = data);
   } catch (error) {
     console.log(error);
