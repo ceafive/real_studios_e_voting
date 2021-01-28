@@ -118,8 +118,7 @@ const Login = ({ setShowVerificationBox }) => {
             }  text-white py-2 px-10 focus:outline-none focus:shadow-outline`}
             type="button"
             onClick={() => {
-              setShowVerificationBox(true);
-              // sendUserOTP();
+              sendUserOTP();
             }}
           >
             {loginLogs.sending ? "Sending..." : "Sign In"}
