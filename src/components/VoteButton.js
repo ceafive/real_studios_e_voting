@@ -14,7 +14,10 @@ const VoteButton = ({ member, groupClicked, setVotedIn }) => {
           onClick={() =>
             setVotedIn((votes) => [
               ...votes,
-              { groupVotedIn: groupClicked, votedFor: member },
+              {
+                groupVotedIn: groupClicked,
+                votedFor: { ...member, votes: member.votes + 1 },
+              },
             ])
           }
         >

@@ -22,7 +22,7 @@ const Main = ({
           setGroupClicked={setGroupClicked}
         />
       ) : (
-        <AuxilliaryMembers />
+        <AuxilliaryMembers compToRender={compToRender} />
       )}
     </div>
   );

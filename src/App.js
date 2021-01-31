@@ -30,7 +30,24 @@ function App() {
           JSON.stringify({ ...parsedData, candidates: members })
         );
       } else {
-        setCandidates(candidates);
+        if (votedIn.length > 0) {
+          const groupsVotedIn = votedIn.map((votedin) => {
+            const group = candidates[votedin["groupVotedIn"]];
+            const newData = group.members.filter(
+              (member) => member.name !== votedin.votedFor.name
+            );
+            const members = [votedin.votedFor, ...newData];
+            return { ...group, members };
+          });
+          const newCandidates = { ...candidates, ...groupsVotedIn };
+          localStorage.setItem(
+            "real_studios",
+            JSON.stringify({ ...parsedData, candidates: newCandidates })
+          );
+          setCandidates(candidates);
+        } else {
+          setCandidates(candidates);
+        }
       }
 
       if (auth) {
@@ -45,7 +62,7 @@ function App() {
     }
 
     return () => {};
-  }, []);
+  }, [votedIn]);
 
   return (
     <div className="flex flex-wrap justify-center items-center min-h-screen w-full">

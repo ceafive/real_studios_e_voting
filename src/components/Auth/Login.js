@@ -115,13 +115,24 @@ const Login = ({ setShowVerificationBox }) => {
               loginLogs.sending
                 ? "bg-gray-500 cursor-default"
                 : "bg-blue-500 hover:bg-blue-700"
-            }  text-white py-2 px-10 focus:outline-none focus:shadow-outline`}
+            }  text-white py-2 px-10 focus:outline-none focus:shadow-outline mr-1`}
             type="button"
             onClick={() => {
               sendUserOTP();
             }}
           >
             {loginLogs.sending ? "Sending..." : "Sign In"}
+          </button>
+          <button
+            className={`
+                 bg-green-500 hover:bg-green-700
+              text-white py-2 px-10 focus:outline-none focus:shadow-outline`}
+            type="button"
+            onClick={() => {
+              setShowVerificationBox(true);
+            }}
+          >
+            Enter Code
           </button>
         </div>
       </form>
