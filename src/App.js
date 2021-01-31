@@ -44,7 +44,7 @@ function App() {
             "real_studios",
             JSON.stringify({ ...parsedData, candidates: newCandidates })
           );
-          setCandidates(candidates);
+          setCandidates(newCandidates);
         } else {
           setCandidates(candidates);
         }
